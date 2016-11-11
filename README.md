@@ -1,2 +1,3 @@
 # CanvasPractice
-H5 Canvas Animation 
+
+Use canvas to accomplish some common animation effects
