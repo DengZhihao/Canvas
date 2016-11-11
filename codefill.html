@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" style="background:#000;"></canvas>
+<script>
+    var canvas=document.getElementById('canvas'),
+        context=canvas.getContext('2d'),w,h;
+    w=canvas.width=window.innerWidth;
+    h=canvas.height=window.innerHeight;
+
+    var clearColor="rgba(0,0,0,.1)",
+            wordColor='#33ff33',
+            words = "0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOP{}ASDFGHJHJKL:ZXCVBBNM,./;'\[]<>?{}-+=*&^%$#@!()",
+            wordsArr=words.split(''),
+            font_size=16,
+            clumns=w/font_size,
+            drops=[];
+
+    for(var i=0;i<clumns;i++){
+        drops[i]=1;
+    }
+
+    function draw(){
+        context.save();
+        context.fillStyle=wordColor;
+        context.font=font_size+'px Arial';
+        for (var i = 0; i < drops.length; i++){
+            var text = wordsArr[Math.floor(Math.random() * wordsArr.length)];//获取随机字符
+            context.fillText(text, i * font_size, drops[i] * font_size);//循环向每个坐标填充字符
+            if (drops[i] * font_size > h && Math.random() > 0.95){  //当超过边界之后进行随机过滤，造成下落速度不一样的效果
+                drops[i] = 0;
+            }
+            drops[i]++;
+        }
+        context.restore();
+    }
+    (function drawFrame(){
+        window.requestAnimationFrame(drawFrame);
+        context.fillStyle=clearColor;
+        context.fillRect(0,0,w,h);
+        draw();
+    })()
+</script>
+</body>
+</html>
