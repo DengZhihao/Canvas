@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<canvas id="canvas" width="500" height="500">
-</canvas>
-<script>
     window.onload=function(){
         var canvas=document.getElementById('canvas'),
                 context=canvas.getContext('2d'),
@@ -54,6 +44,3 @@
             position+=speed;
         })()
     }
-</script>
-</body>
-</html>
